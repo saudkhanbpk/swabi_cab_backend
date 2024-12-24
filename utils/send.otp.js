@@ -7,14 +7,12 @@ const client = twilio(accountSid, authToken);
 
 // the account has use in a samdeveloper account
 export const sendOtp = async (phoneNumber, otp) => {
-    console.log`Sending OTP to ${phoneNumber}`
   try {
     await client.messages.create({
       body: `Your verification code is: ${otp}`,
-        from: process.env.TWILIO_PHONE_NUMBER,
+      from: process.env.TWILIO_PHONE_NUMBER,
       to: phoneNumber,
     });
-    console.log(`OTP sent to ${phoneNumber}`);
   } catch (error) {
     console.error("Error sending OTP:", error);
     throw new Error("Failed to send OTP");
