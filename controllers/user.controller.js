@@ -53,15 +53,18 @@ export const login = async (req, res) => {
       });
     }
 
-    if (!user.verified) {
-      return res.status(400).json({
-        message: "Phone number not verified. Please verify your phone number.",
-        success: false,
-      });
-    }
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
+
+    // Update the user's OTP in the database
+    user.otp = hashedOtp;
+    await user.save();
+
+    // Send OTP to the user's phone number
+    await sendOtp(phoneNumber, otp);
 
     return res.status(200).json({
-      message: "Login successful",
+      message: "OTP sent successfully. Please verify your phone number.",
       success: true,
     });
   } catch (error) {
