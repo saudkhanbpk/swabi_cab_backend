@@ -87,12 +87,6 @@ export const verifyOtp = async (req, res) => {
         .json({ message: "User not found", success: false });
     }
 
-    if (user.verified) {
-      return res
-        .status(400)
-        .json({ message: "Phone number already verified", success: false });
-    }
-
     const hashedOtp = crypto.createHash("sha256").update(otp).digest("hex");
 
     if (user.otp !== hashedOtp) {
