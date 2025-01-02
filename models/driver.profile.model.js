@@ -34,11 +34,23 @@ const driverProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  carName: {
+    type: String,
+    required: true,
+  },
   carDocument: {
     type: String,
     required: true,
   },
   licenceFront: {
+    type: String,
+    required: true,
+  },
+  licenceBack: {
+    type: String,
+    required: true,
+  },
+  profile: {
     type: String,
     required: true,
   },

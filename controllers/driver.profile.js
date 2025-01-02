@@ -19,14 +19,14 @@ const uploadImageToCloudinary = (fileBuffer, folder) => {
 
 export const driverProfile = async (req, res) => {
   try {
-    const { name, email, phoneNumber, carCategory, carModel, carNumber } = req.body;
+    const { name, email, phoneNumber, carCategory,carName, carModel, carNumber } = req.body;
 
-    if (!name || !email || !phoneNumber || !carCategory || !carModel || !carNumber) {
+    if (!name || !email || !phoneNumber || !carCategory || !carModel || !carNumber || !carName) {
       return res.status(400).json({ message: "All fields are required", success: false });
     }
 
     const uploadedImages = {};
-    const requiredFields = ["cnicFront", "cnicBack", "carDocument", "licenceFront", "licenceBack"];
+    const requiredFields = ["cnicFront", "cnicBack", "carDocument", "licenceFront", "licenceBack", "profile"];
 
     for (const field of requiredFields) {
       if (req.files[field]) {
@@ -54,9 +54,11 @@ export const driverProfile = async (req, res) => {
       carCategory,
       carModel,
       carNumber,
+      carName,
       carDocument: uploadedImages.carDocument,
       licenceFront: uploadedImages.licenceFront,
       licenceBack: uploadedImages.licenceBack,
+      profile: uploadedImages.profile,
     });
 
     await driverProfile.save();

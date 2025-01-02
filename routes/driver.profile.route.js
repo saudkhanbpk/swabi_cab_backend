@@ -12,6 +12,7 @@ const uploadFields = upload.fields([
   { name: 'carDocument', maxCount: 1 },
   { name: 'licenceFront', maxCount: 1 },
   { name: 'licenceBack', maxCount: 1 },
+  { name: 'profile', maxCount: 1 },
 ]);
 
 driverRouter.post('/driver-profile', uploadFields, driverProfile);
