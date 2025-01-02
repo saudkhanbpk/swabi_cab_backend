@@ -38,6 +38,10 @@ const driverProfileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  cnicNumber: {
+    type: String,
+    required: true,
+  },
   carDocument: {
     type: String,
     required: true,
