@@ -64,7 +64,7 @@ export const driverProfile = async (req, res) => {
 
     await driverProfile.save();
 
-    return res.status(201).json({ message: "Driver profile created", success: true });
+    return res.status(201).json({ message: "Driver profile created", success: true, driverProfile });
   } catch (error) {
     console.error("Internal server error:", error);
     return res.status(500).json({ message: "Internal server error", success: false });
